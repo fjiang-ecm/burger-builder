@@ -14,7 +14,14 @@
 .Header {
     background-color: #8F5E1E;
     color: white;
-    margin: 0;
+    margin: -1px;
+    padding: 16px;
+}
+
+.ErrorHeader {
+    background-color: #ff0000;
+    color: white;
+    margin: -1px;
     padding: 16px;
 }
 

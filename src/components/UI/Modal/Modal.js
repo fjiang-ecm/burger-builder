@@ -13,7 +13,7 @@ const modal = (props) => (
             opacity: props.show ? '1' : '0'
         }}
         >
-            <h3 className={classes.Header}>{props.title}</h3>
+            <h3 className={props.error ? classes.ErrorHeader : classes.Header}>{props.title}</h3>
             <div className={classes.Body}>
                 {props.children}
             </div>
