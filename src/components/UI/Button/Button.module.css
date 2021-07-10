@@ -10,6 +10,12 @@
     font-weight: bold;
 }
 
+.Button:disabled {
+    background-color: transparent;
+    color: #ccc;
+    cursor: not-allowed;
+}
+
 .Success {
     background-color: #5C9210;
 }
