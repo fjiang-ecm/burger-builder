@@ -9,11 +9,63 @@ import classes from './ContactData.module.css';
 
 class ContactData extends Component {
     state = {
-        name: '',
-        email: '',
-        address: {
-            street: '',
-            postalCode: ''
+        orderForm: {
+            name: {
+                elementType: 'input',
+                elementLabel: 'Name',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your Name'
+                },
+                value: ''
+            },
+            street: {
+                elementType: 'input',
+                elementLabel: 'Street',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Steet'
+                },
+                value: ''
+            },
+            zipCode: {
+                elementType: 'input',
+                elementLabel: 'Postal Code',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'ZIP Code'
+                },
+                value: ''
+            },
+            country: {
+                elementType: 'input',
+                elementLabel: 'Country',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Country'
+            },
+                value: ''
+            },
+            email: {
+                elementType: 'input',
+                elementLabel: 'E-Mail',
+                elementConfig: {
+                    type: 'email',
+                    placeholder: 'Your E-Mail'
+                },
+                value: ''
+            },
+            deliveryMethod: {
+                elementType: 'select',
+                elementLabel: 'Delivery Method',
+                elementConfig: {
+                    options: [
+                        {value: 'fastest', displayValue: 'Fastest'},
+                        {value: 'cheapest', displayValue: 'Cheapest'}
+                    ]
+                },
+                value: 'fastest'
+            },
         },
         loading: false
     }
@@ -48,14 +100,30 @@ class ContactData extends Component {
             });
     }
 
+    inputChangedHandler = (event, inputIdentifier) => {
+        const updatedOrderForm = {...this.state.orderForm};
+        const updatedFormElement = {...updatedOrderForm[inputIdentifier]};
+
+        updatedFormElement.value = event.target.value;
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
+
+        this.setState({orderForm: updatedOrderForm});
+    }
+
     render() {
         let form= (
-            <form>
-                <Input inputtype="input" label="Name" type="text" name="name" placeholder="Your name" />
-                <Input inputtype="input" label="Email" type="email" name="email" placeholder="Your email" />
-                <Input inputtype="input" label="Street" type="text" name="street" placeholder="Street" />
-                <Input inputtype="input" label="Postal Code" type="text" name="postal" placeholder="Postal Code" />
-                <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
+            <form onSubmit={this.orderHandler}>
+                {formElementsArray.map(formElement => (
+                    <Input
+                        key={formElement.id}
+                        elementType={formElement.config.elementType}
+                        elementConfig={formElement.config.elementConfig}
+                        value={formElement.config.value}
+                        label={formElement.config.elementLabel}
+                        changed={(event) => this.inputChangedHandler(event, formElement.id)}
+                    />
+                ))}
+                <Button btnType="Success">ORDER</Button>
             </form>
         );
 
