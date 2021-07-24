@@ -18,7 +18,7 @@ export const authSuccess = (token, userId) => {
 
 export const authFail = (error) => {
     return {
-        type: actionTypes.FETCH_ORDERS_FAIL,
+        type: actionTypes.AUTH_FAIL,
         error: error
     };
 };
@@ -46,7 +46,7 @@ export const auth = (email, password, isSignUp) => {
             })
             .catch(err => {
                 console.log(err);
-                dispatch(authFail(err));
+                dispatch(authFail(err.response.data.error));
             })
     };
 };
