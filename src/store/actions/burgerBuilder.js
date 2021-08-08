@@ -31,11 +31,11 @@ export const setIngredients = (ingredients) => {
 
 export const initIngredients = () => {
     return dispatch => {
-        axios.get('https://react-burger-builder-5fbe3-default-rtdb.europe-west1.firebasedatabase.app/ingredients.json')
+        axios.get('/ingredients.json')
             .then(response => {
                 dispatch(setIngredients(response.data));
             })
-            .catch(error => {
+            .catch(_ => {
                 dispatch(fetchIngredientsFailed());
             });
     };
